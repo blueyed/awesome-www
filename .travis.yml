@@ -55,11 +55,9 @@ before_install:
         branch="pr-$TRAVIS_PULL_REQUEST"
       fi
       if [ "$branch" != master ]; then
-        cd $BUILD_WEB
-        if ! git checkout -b "$branch" "origin/$branch"; then
-          git checkout -b "$branch"
+        if ! git --work-tree="$BUILD_WEB" checkout -b "$branch" "origin/$branch"; then
+          git --work-tree="$BUILD_WEB" checkout -b "$branch"
         fi
-        cd -
       fi
     fi
 
